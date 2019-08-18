@@ -1,0 +1,90 @@
+
+   
+<div id="main" class="container">
+  <div >
+    <br>
+    <h3> ................Bank search Application..............</h3>
+
+    <div>
+      <form>
+        <div >
+          <div style="display: flex;justify-content: space-around;flex-wrap: nowrap;padding: 10px;margin:5px;">
+            <input style="width:70%"type = "text" class = "form-control" name="searchString" placeholder="search here..."
+           (keypress) ="filterData($event)"
+            [(ngModel)]="searchString"/> 
+            <label  style="margin-left:10px;" for="sel1">Select City:</label>
+    <select style="width:10%" class="form-control " [(ngModel)]="city" name = "city"(change)="getCityData($event)">
+        
+        <option value="Mumbai" selected>Mumbai</option>
+        <option value="Lucknow">Lucknow</option>
+        <option value="Delhi">Delhi</option>
+        <option value="Bihar">Bihar</option>
+      </select> 
+      <label  style="margin-left:10px;" for="sel1">Select No of Rows to Display:</label>
+      <select style="width:10%;" class="form-control " [(ngModel)]="limit" name = "limit"(change)="getLimitData($event)">
+
+      <option value="10"selected>10</option>
+      <option value="20">20</option>
+      <option value="30">30</option>
+      <option value="40">40</option>
+    </select> 
+
+          </div>
+
+        </div>
+      
+      </form>
+    </div>
+    <div>
+
+      <div class="table-responsive" style="display: flex;justify-content: center;flex-wrap:wrap ">
+
+        <table class="table  table-striped css-serial" border="1">
+          <thead>
+            <tr>
+              <th scope="col">   S.No   </th>
+              <th scope="col">   IFSC   </th>
+              <th class="w-15"scope ="col">Bank_ID </th>
+              <th scope="col">Branch</th>
+              <th class="w-15" scope="col">Address</th>
+              <th scope="col">City</th>
+              <th scope="col">District</th>
+              <th scope="col">State</th>
+              <th scope="col">Mark As favourite</th>
+              <th scope="col">favourite</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style = "align-self: center" *ngFor= "let post of nativeBranch ;index as i"> 
+
+                <td>{{i+1}}</td>
+              <td><a  routerLink="/bank/{{city}}/{{post.ifsc}}" routerLinkActive="active">{{post.ifsc}}</a></td>
+              <td>{{post.bank_id}}</td>
+              <td>{{post.branch}}</td>
+              <td>{{post.address}}</td>
+              <td>{{post.city}}</td>
+              <td>{{post.district}}</td>
+              <td>{{post.state}}</td>
+              <td [ngSwitch]="post.fav">
+                <button  *ngSwitchCase="'YES'" id="{{i+1}}" name="yo" (click)="setFavourite($event,post.ifsc)">Unmark as Favourite</button>
+                <button  *ngSwitchDefault id="{{i+1}}" name="yo" (click)="setFavourite($event,post.ifsc)">Mark as Favourite</button>
+              </td>
+              <td>{{post.fav}}</td>
+            </tr>
+          </tbody>
+        </table>
+        
+          <button class="btn btn-info" id="viewMore" (click)="nextRecords($event)">View More</button>
+        
+      </div>
+    </div>
+  </div>
+</div> 
+<router-outlet></router-outlet>
+
+
+
+
+
+
+  

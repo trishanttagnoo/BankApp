@@ -1,0 +1,14 @@
+thead{
+    border-block-color: black;
+    background-color: plum;
+    border: solid black;
+
+}
+tr{ 
+    border-block-start-color: blue;
+    background-color: palevioletred;
+
+}
+input{
+    color: blueviolet;
+}
